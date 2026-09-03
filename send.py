@@ -17,6 +17,7 @@ class Client(commands.Bot):
     async def on_message(self, message):
         content = message.content
         channel = message.channel
+        msg = content.split(' ')
         content_lower = f'{message.content}'.lower()
         if message.author == self.user:
             return
