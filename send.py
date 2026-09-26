@@ -23,6 +23,7 @@ class Client(commands.Bot):
             return
         if "https://youtu.be/" in content_lower or "https://youtube.com/" in content_lower: 
            if "?si=" in content_lower or "?is=" in content_lower:
+                print(msg)
                 await message.delete()
                 await channel.send(f"Your YouTube link is not sanitized, please sanitize your YouTube link.\n-# ||<@{message.author.id}>||")
 
