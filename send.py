@@ -1,4 +1,4 @@
-import discord
+import discord, datetime
 from discord.ext import commands, tasks
 
 class Client(commands.Bot):
@@ -17,15 +17,42 @@ class Client(commands.Bot):
     async def on_message(self, message):
         content = message.content
         channel = message.channel
+        sent = message.created_at
+
+        import calendar 
+        sent = calendar.timegm(sent.utctimetuple())
         msg = content.split(' ')
-        content_lower = f'{message.content}'.lower()
+
         if message.author == self.user:
             return
-        if "https://youtu.be/" in content_lower or "https://youtube.com/" in content_lower: 
-           if "?si=" in content_lower or "?is=" in content_lower:
-                print(msg)
-                await message.delete()
-                await channel.send(f"Your YouTube link is not sanitized, please sanitize your YouTube link.\n-# ||<@{message.author.id}>||")
+        for word in msg:
+            if "https://youtu.be/" in word or "https://www.youtube.com/" in word or "https://youtube.com/" in word: 
+                index = msg.index(word)
+                msg.remove(word)
+                try:
+                    link = word.split("?")
+                except Exception as e:
+                    print(f"Error: {e}")
+                else:
+                    linkb = link[1]
+                    linkb_parts = linkb.split("&")
+                for part in linkb_parts:
+                    if "si=" in part or "is=" in part:
+                            sanitized = False
+                            linkb_parts.remove(part)
+                            try:
+                                await message.delete()
+                                sanitized = True
+                            except Exception as e:
+                                pass
+                                # await channel.send(f"Your YouTube link is not sanitized, please sanitize your YouTube link.\n-# ||<@{message.author.id}>||")
+        try:
+            if sanitized:
+                await channel.send(f"<@{message.author.id}>:\n{" ".join(msg[:index] + [link[0] + "?" + "&".join(linkb_parts)] + msg[index:])}\n-# <t:{sent}:s>")
+        except:
+            pass
+
+
 
 intents = discord.Intents.default()
 intents.message_content = True
