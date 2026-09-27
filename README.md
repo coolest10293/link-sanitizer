@@ -9,9 +9,10 @@ When the bot detects an unsanitized youtube link, it deletes the message and res
 
 It sends the original poster, along with the timestamp of the original message, too!
 
----
 
-### Future
+
+
+## Future
 I am working on a variant of the bot that looks at a dictionary containing several different websites and what modifiers to their links are and aren't "safe", so that the bot can remove them automatically.
 
 That project is being developed on the cross-platform-version branch, so look there if you are interested.
