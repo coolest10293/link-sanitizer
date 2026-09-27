@@ -1,4 +1,4 @@
 /discord_token.txt
 /.venv/
-link-sanitizer.code-workspace
-.vscode/settings.json
+/link-sanitizer.code-workspace
+/.vscode/
