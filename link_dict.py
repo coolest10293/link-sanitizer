@@ -1,1 +1,0 @@
-url_list = {'youtube.com': {'si': False, 'is': False, 'list': True, 't': True, 'v': True}, 'youtu.be': {'si': False, 'is': False, 'list': True, 't': True}, 'instagram.com': {'igsh': False, 'utm_source': False}}
